@@ -4,8 +4,8 @@ in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Krista Manche.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -50,9 +50,36 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # -------------------------------------------------------------------------
+    x_up=rectangle.get_upper_left_corner().x
+    y_up=rectangle.get_upper_left_corner().y
+
+    x_down=rectangle.get_lower_right_corner().x
+    y_down=rectangle.get_lower_right_corner().y
+
+    new_rec=rg.Rectangle(rg.Point(x_up,y_up),rg.Point(x_down,y_down))
+
+    for num in range (n):
+
+        for row in range (num+1):
+            newright_x=x_down+row*new_rec.get_width()
+            newleft_x=x_up+row*new_rec.get_width()
+            new_rec = rg.Rectangle(rg.Point(newleft_x, y_up), rg.Point(newright_x, y_down))
+
+            new_rec.attach_to(window)
+            window.render()
+
+        y_down = y_down - rectangle.get_height()
+        y_up = y_up - rectangle.get_height()
+
+        x_down=x_down-(rectangle.get_width()*.5)
+        x_up=x_up-(rectangle.get_width()*.5)
+
+
+    window.render()
+
 
 
 # -----------------------------------------------------------------------------
