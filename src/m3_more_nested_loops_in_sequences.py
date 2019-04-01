@@ -18,7 +18,7 @@ def main():
 def run_test_largest_number():
     """ Tests the    largest_number    function. """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  largest_number  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
     # -------------------------------------------------------------------------
@@ -44,11 +44,12 @@ def run_test_largest_number():
     answer = largest_number(([], [], []))
     print('Expected and actual are:', expected, answer)
 
-    # TODO 2 (continued): Add your ADDITIONAL test(s) here:
-    expected = 13
-    answer = largest_number([(3, 1, 4),
-                             (13, 10, 11, 7, 10),
-                             [1, 2, 3, 4]])
+    # DONE 2 (continued): Add your ADDITIONAL test(s) here:
+    expected = 15
+    answer = largest_number([(13, 15, 14),
+                             (3, 0, 3, 8, 10),
+                             [1, 1, 1, 1]])
+    print('Expected and actual are:', expected, answer)
 
 
 def largest_number(seq_seq):
@@ -77,15 +78,25 @@ def largest_number(seq_seq):
     where each subsequence contains only numbers.
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -------------------------------------------------------------------------
+    large=None
+    for s in range (len(seq_seq)):
+        for num in range (len(seq_seq[s])):
+            tree=seq_seq[s]
+            if large==None:
+                large=tree[num]
+            if tree[num]>large:
+                large=tree[num]
+
+    return large
 
 
 def run_test_largest_negative_number():
     """ Tests the    largest_negative_number    function. """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # DONE: 4. Implement this TEST function.
     #   It TESTS the  largest_negative_number  function defined below.
     #
     #   Include enough tests to give you confidence that your solution
@@ -95,6 +106,29 @@ def run_test_largest_negative_number():
     print('-------------------------------------------------')
     print('Testing the   LARGEST_NEGATIVE_NUMBER   function:')
     print('-------------------------------------------------')
+    # Test 1:
+    expected = None
+    answer = largest_negative_number([(3, 1, 4),
+                             (13, 10, 11, 7, 10),
+                             [1, 2, 3, 4]])
+    print('Expected and actual are:', expected, answer)
+
+    # Test 2:
+    expected = -1111111111111111
+    answer = largest_negative_number(([], [-1111111111111111], []))
+    print('Expected and actual are:', expected, answer)
+
+    # Test 3:
+    expected = None
+    answer = largest_negative_number(([], [], []))
+    print('Expected and actual are:', expected, answer)
+
+    # DONE 2 (continued): Add your ADDITIONAL test(s) here:
+    expected = -15
+    answer = largest_negative_number([(13, -15, 14),
+                             (-3, 0, 3, -8, 10),
+                             [1, -1, 1, -1]])
+    print('Expected and actual are:', expected, answer)
 
 
 def largest_negative_number(seq_seq):
@@ -120,13 +154,23 @@ def largest_negative_number(seq_seq):
     where each subsequence contains only numbers.
     """
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # CHALLENGE: Try to solve this problem with no additional sequences
     #   being constructed (so the SPACE allowed is limited to the
     #   give sequence of sequences plus any non-list variables you want).
     # -------------------------------------------------------------------------
+    large = None
+    for s in range(len(seq_seq)):
+        for num in range(len(seq_seq[s])):
+            tree = seq_seq[s]
+            if (large == None) and (tree[num]<0):
+                large = tree[num]
+                if tree[num] < large:
+                    large = tree[num]
+
+    return large
 
 
 def run_test_first_is_elsewhere_too():
@@ -374,10 +418,22 @@ def first_is_elsewhere_too(seq_seq):
     #              (example:  [9, 6, 7, 9, 6, 1].index(6) returns 1)
     #   in this problem, as doing so would defeat the goal of providing
     #   practice at loops within loops (within loops within ...)
-    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------\
+    truth=False
+
+    for k in range(len(seq_seq[0])):
+        for w in range (1,len(seq_seq)):
+            for s in range (len(seq_seq[w])):
+                if (seq_seq[0][k])==(seq_seq[w][s]):
+                    truth =True
+                    break
+
+    return truth
+
 
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
-# -----------------------------------------------------------------------------
+# --------
+# ---------------------------------------------------------------------
 main()
